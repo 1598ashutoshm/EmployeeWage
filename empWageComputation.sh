@@ -2,6 +2,10 @@
 
 echo "Welcome to Employee Wage"
 
+EMP_RATE_PER_HR=20
+empHr=8
+
+
 # constant
 IS_PRESENT=1
 
@@ -12,10 +16,10 @@ empcheck=$(( RANDOM%2 ))
 
 if [ $empcheck -eq $IS_PRESENT ]
 then
-      echo " Employee Present "
+      emphrs=8
 
 else
-      echo " Employee Absent "
+      emphrs=0
 fi
 
-echo "Testing"
+salary=$(( $EMP_RATE_PER_HR * $emphrs ))
