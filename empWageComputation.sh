@@ -1,5 +1,4 @@
-#! /bin/bash -x
-echo " Employee Wage Example using function "
+#!/bin/bash
 
 ispresentfulltime=1
 ispresentparttime=2
@@ -23,6 +22,13 @@ function getworkhours(){
          echo $emphrs
 
 }
+function getwageforday(){
+
+         local emphrs=$1
+         local wages=$(( $EMP_RATE_PER_HR * $emphrs ))
+         echo $wages
+}
+
 
 while [ $totalworkingdays  -lt $noofworkingdays ] &&
       [ $totalworkinghrs  -lt $maxworkinghrs ]
@@ -30,9 +36,10 @@ do
      totalworkingdays=$(( $totalworkingdays + 1 ))
      empcheck=$(( RANDOM % 3 ))   #0/1/2
      emphrs="$( getworkhours $empcheck )"
+     dailywages[$totalworkingdays]=$(( $EMP_RATE_PER_HR * $emphrs ))
      totalworkinghrs=$(( $totalworkinghrs + $emphrs ))
 
-#salary=$((  $EMP_RATE_PER_HR * $emphrs ))
 done
 salary=$((  $EMP_RATE_PER_HR * $totalworkinghrs ))
-
+echo ${!dailywages[*]}
+echo ${dailywages[*]}
